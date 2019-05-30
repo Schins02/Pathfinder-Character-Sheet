@@ -1,40 +1,127 @@
 import React, { Component } from 'react';
 import 'typeface-roboto';
 import './App.css';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import TopLevelStats from './TopLevelStats.js';
 import PageOneStats from './PageOneStats.js';
 
 class App extends Component {
+
+  // *** duplicate function - move this into a reducer?
+  // The number of ability points above 10 divided by two, then round down
+  //
+  calculateAbilityMod(abilityScore) {
+    return Math.floor((abilityScore - 10) / 2)
+  }
+
+  magicGreatAxe = {
+    twoHanded: true,
+
+    // Update this flag
+    magic: true,
+  }
+
+  weapons = [
+    this.magicGreatAxe
+  ]
+
+  calculateDamageBonus() {
+    var weapon = this.stats.currentWeapon;
+    var strengthDamageBonus  = this.calculateAbilityMod(this.stats.abilityStats.strength);
+    if(weapon.twoHanded) {
+      strengthDamageBonus = strengthDamageBonus * (1.5);
+    }
+
+    // create 
+    if(weapon.magic) {
+      strengthDamageBonus = strengthDamageBonus + 1;
+    }
+  }
+
+  // setDamageBonus() {
+
+  // }
+
+
+  topLevelStats = {
+    name: "Gorath",
+    alignment: "Chaotic Evil",
+    level: 4,
+    size: 'M',
+    // Human speed is 30, + 10 from Fast Movement
+    speed: '40'
+  }
+
+  // Second iteration
+  // Will have object for each Ability
+  // Will mere into one stats object
+  stats = {
+
+    // Rethink this whole structure - eventually pulling from db so doesn't really
+    // Matter here
+    currentWeapon: this.weapons[0],
+
+    // Ability Stats
+    abilityStats : {
+      strength : {
+        score: 18
+      },
+      dexterity : {
+        score: 12
+      },
+      constitution : {
+        score: 12
+      },
+      intelligence : {
+        score: 12
+      },
+      wisdom : {
+        score: 12
+      },
+      charisma : {
+        score : 13
+      }
+    },
+
+    playerStats : {
+      totalHp: 35,
+      level: 4,
+      // Scale Mail - make dynamic
+      ArmorBonus: 5,
+      // 2 bonus from Erratic Malefactor
+      initiativeMod: 2,
+      baseFortitudeSAve: 4,
+      baseReflexSave: 1,
+      baseWillSave: 1,
+      // From Cloak of Resistance
+      saveBonus: 1
+    }
+  }
   
   render() {
 
-    var topLevelStats = {
-      name: "Gorath",
-      alignment: "Chaotic Evil",
-      level: 2,
-      size: 'M',
-      speed: '40'
-    }
 
-    var pageOneStats = {
-      strength: 18,
-      strengthAbilityMod: 4,
-      constitution: 12,
-      constitutionAbilityMod: 1,
-      intelligence: 12,
-      intelligenceAbililtyMod: 1,
-      wisdom: 12,
-      wisdomAbilityMod: 1,
-      charisma: 12, 
-      charismaAbilityMod: 1
+
+    var playerTurn = {
+      normalRound : {
+        moveAction : 1,
+        fiveFootStep: 1,
+        standardOrMoveAction: 1,
+        swiftAction: 1,
+        // As many free actions as you want
+        freeAction: 10000
+      },
+      fullActionRound : {
+        fullRoundAction: 1
+      }
     }
 
     return (
       <div className="container">
-          <TopLevelStats topLevelStats={topLevelStats}></TopLevelStats>
-          <PageOneStats pageOneStats={pageOneStats}></PageOneStats>
+          <TopLevelStats topLevelStats={this.topLevelStats}></TopLevelStats>
+          <PageOneStats 
+            abilityStats={this.stats.abilityStats} 
+            playerStats={this.stats.playerStats}>
+          </PageOneStats>
       </div>
     );
   }
