@@ -1,21 +1,13 @@
 import React, { Component } from 'react';
 import 'typeface-roboto';
 import './App.css';
-import TopLevelStats from './TopLevelStats.js';
-import PageOneStats from './PageOneStats.js';
+import TopLevelStats from './components/TopLevelStats.js';
+import PageOneStats from './components/PageOneStats3.js';
 
 class App extends Component {
 
-  // *** duplicate function - move this into a reducer?
-  // The number of ability points above 10 divided by two, then round down
-  //
-  calculateAbilityMod(abilityScore) {
-    return Math.floor((abilityScore - 10) / 2)
-  }
-
   magicGreatAxe = {
     twoHanded: true,
-
     // Update this flag
     magic: true,
   }
@@ -40,7 +32,6 @@ class App extends Component {
   // setDamageBonus() {
 
   // }
-
 
   topLevelStats = {
     name: "Gorath",
@@ -98,9 +89,6 @@ class App extends Component {
   }
   
   render() {
-
-
-
     var playerTurn = {
       normalRound : {
         moveAction : 1,
@@ -118,9 +106,7 @@ class App extends Component {
     return (
       <div className="container">
           <TopLevelStats topLevelStats={this.topLevelStats}></TopLevelStats>
-          <PageOneStats 
-            abilityStats={this.stats.abilityStats} 
-            playerStats={this.stats.playerStats}>
+           <PageOneStats>
           </PageOneStats>
       </div>
     );

@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { withStyles } from '@material-ui/core/styles';
+import '../App.css';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
+import { connect } from 'react-redux'
 
 class TopLevelStats extends Component {
 
-    state = { topLevelStats: this.props.topLevelStats }
+constructor(props) {
+    super(props)
+}
 
     render() {
         var gridStyle = {
@@ -37,11 +38,11 @@ class TopLevelStats extends Component {
                 </Grid>
                 <Grid item xs={12} sm={12} md={8}>
                     <Paper style={paperStyle}>
-                        <Grid container spacing={4}>
+                        <Grid container>
                             <Grid item xs={12} sm={12} md={3}>
                                 <TextField
                                   label="Name"
-                                  defaultValue={this.state.topLevelStats.name}
+                                  defaultValue={this.props.topLevelStats.name}
                                   style={textFieldStyle}
                                   InputProps={{
                                     readOnly: true,
@@ -51,7 +52,7 @@ class TopLevelStats extends Component {
                             <Grid item xs={12} sm={12} md={3}>
                                 <TextField
                                     label="Alignment"
-                                    defaultValue={this.state.topLevelStats.alignment}
+                                    defaultValue={this.props.topLevelStats.alignment}
                                     style={textFieldStyle}
                                     InputProps={{
                                         readOnly: true,
@@ -61,7 +62,7 @@ class TopLevelStats extends Component {
                             <Grid item xs={12} sm={12} md={3}>
                                 <TextField
                                     label="Level"
-                                    defaultValue={this.state.topLevelStats.level}
+                                    defaultValue={this.props.topLevelStats.level}
                                     style={textFieldStyle}
                                     InputProps={{
                                         readOnly: true,
@@ -71,7 +72,7 @@ class TopLevelStats extends Component {
                             <Grid item xs={12} sm={12} md={3}>
                                 <TextField
                                     label="Speed"
-                                    defaultValue={this.state.topLevelStats.speed}
+                                    defaultValue={this.props.topLevelStats.speed}
                                     style={textFieldStyle}
                                     InputProps={{
                                         readOnly: true,
@@ -86,4 +87,10 @@ class TopLevelStats extends Component {
     }
 }
 
-export default TopLevelStats;
+//export default TopLevelStats;
+
+const mapStateToProps = (state) => {
+    return state;
+  }
+  
+  export default connect(mapStateToProps)(TopLevelStats); 

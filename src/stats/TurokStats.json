@@ -1,0 +1,51 @@
+import weapons from './weapons.js';
+
+ var state = {
+    //currentWeapon: weapons[0],
+
+    abilityScores: {
+      strength: 18,
+      dexterity: 12,
+      constitution: 12,
+      intelligence: 12,
+      wisdom: 12,
+      charisma: 13
+    }
+    // Ability Stats
+    // abilityScores: {
+    //   strength: {
+    //     score: 18,
+    //   },
+    //   dexterity: {
+    //     score: 12,
+    //   },
+    //   constitution: {
+    //     score: 12,
+    //   },
+    //   intelligence: {
+    //     score: 12,
+    //   },
+    //   wisdom: {
+    //     score: 12,
+    //   },
+    //   charisma: {
+    //     score: 13,
+    //   },
+    // }
+  
+    // playerStats: {
+    //   totalHp: 35,
+    //   level: 4,
+    //   // Scale Mail - make dynamic
+    //   ArmorBonus: 5,
+    //   // 2 bonus from Erratic Malefactor
+    //   initiativeMod: 2,
+    //   baseFortitudeSAve: 4,
+    //   baseReflexSave: 1,
+    //   baseWillSave: 1,
+    //   // From Cloak of Resistance
+    //   saveBonus: 1,
+    // },
+  }
+
+export default state;
